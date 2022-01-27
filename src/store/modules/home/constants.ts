@@ -1,0 +1,3 @@
+export enum ActionTypes {
+  INCREAMENT_COUNTER = 'INCREAMENT_COUNTER'
+}

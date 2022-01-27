@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: 'http://localhost:9001',
+  timeout: 5000,
+  withCredentials: true
 })
 
 service.interceptors.request.use((config) => {
@@ -28,7 +30,7 @@ export const get = (url: string, params: any = {}) => {
 // post请求配置
 export const post = (url: string, data: any = {}) => {
   return new Promise((resolve, reject) => {
-    service.get(url, data).then(res => {
+    service.post(url, data).then(res => {
       resolve(res);
     }, err => {
       reject(err)

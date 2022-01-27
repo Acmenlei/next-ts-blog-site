@@ -6,8 +6,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <title>coderlei's blog</title>
           <meta content="coderlei's blog" />
           <meta content='个人博客' />
+          <meta content='只有知道真相 你才能获得自由' />
         </Head>
         <body>
           <Main />

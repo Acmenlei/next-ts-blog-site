@@ -1,0 +1,26 @@
+@import '~normalize.css';
+
+.container-wrap {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mr-15 {
+  margin-right: 15px;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+.text-one-line {
+  text-align: left;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
