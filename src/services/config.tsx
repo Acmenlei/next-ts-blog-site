@@ -1,4 +1,6 @@
 import axios from "axios";
+import store from "@/store"
+import { hideLoadingAction, showLoadingAction } from "@/store/modules/home/actionCreators";
 
 const service = axios.create({
   baseURL: 'http://localhost:9001',
@@ -7,13 +9,13 @@ const service = axios.create({
 })
 
 service.interceptors.request.use((config) => {
-  console.log("请求拦截")
+  store.dispatch(showLoadingAction())
   return config;
 })
 
 // 解构data
 service.interceptors.response.use((data) => {
-  console.log("响应拦截")
+  store.dispatch(hideLoadingAction())
   return data.data;
 })
 
@@ -24,6 +26,7 @@ export const get = (url: string, params: any = {}) => {
       resolve(res);
     }, err => {
       reject(err)
+      store.dispatch(hideLoadingAction())
     })
   })
 }
@@ -34,6 +37,7 @@ export const post = (url: string, data: any = {}) => {
       resolve(res);
     }, err => {
       reject(err)
+      store.dispatch(hideLoadingAction())
     })
   })
 }

@@ -5,10 +5,11 @@ export const AppHeaderWrapper = styled.div`
     top: 0;
     z-index: 99;
     background-color: ${(props: any) => props.theme};
-    /* padding: 5px 0; */
+    transition: background-color .2s;
+    
   .nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
   }
@@ -17,8 +18,7 @@ export const AppHeaderWrapper = styled.div`
 export const AppHeaderLeftWrapper = styled.div`
   flex: 1;
   display: flex;
-  align-content: center;
-  justify-content: center;
+  align-items: center;
   
   span.logo-desc {
       color: #f8f8f8;
@@ -53,8 +53,38 @@ export const AppHeaderCenterWrapper = styled.div`
 export const AppHeaderRightWrapper = styled.div`
   flex: 0.5;
   color: #f8f8f8;
+  text-align: right;
   cursor: pointer;
-  i {
-    font-size: 20px;
+  overflow: hidden;
+  
+  img {
+    transition: transform 1s;
+    
+    &:hover {
+    transform: rotate(360deg);
+  }
+  }
+
+  .theme-enter {
+    transform: translateY(-50px);
+  }
+  .theme-enter-active {
+    transform: translateY(0);
+    transition: transform .3s;
+  }
+  .theme-enter-done {
+    transform: translateY(0);
+    transition: transform .3s;
+  }
+  .theme-exit {
+    transform: translateY(0);
+  }
+  .theme-exit-active {
+    transform: translateY(50px);
+    transition: transform .3s;
+  }
+  .theme-exit-done {
+    transform: translateY(50px);
+    transition: transform .3s;
   }
 `

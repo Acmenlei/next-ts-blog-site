@@ -1,3 +1,4 @@
+import { getCurrentFontColor } from "@/utils/theme"
 import styled from "styled-components"
 
 export const ArticleRecentWrapper = styled.ul`
@@ -18,7 +19,7 @@ export const ArticleRecentWrapper = styled.ul`
     span {
       &:nth-child(1) {
         flex: 1;
-        color: #f8f8f8;
+        color: ${(props: any) => getCurrentFontColor(props.theme)};
       }
 
       &:nth-child(2) {

@@ -13,6 +13,18 @@
   margin-right: 15px;
 }
 
+.m-5 {
+  margin: 5px;
+}
+
+.ant-tag {
+  cursor: pointer;
+}
+
+.ant-tag:hover {
+  opacity: .8;
+}
+
 ul, ol {
   list-style: none;
 }
@@ -23,4 +35,13 @@ ul, ol {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+a:hover {
+  color: #ccc;
 }

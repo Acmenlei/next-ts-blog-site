@@ -1,13 +1,16 @@
+import { getCurrentCardBackground, getCurrentFontColor } from "@/utils/theme"
 import styled from "styled-components"
 
 export const ArticleCardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(50, 50, 50, .7);
+  background-color: ${(props: any) => getCurrentCardBackground(props.theme)};
   margin-bottom: 20px;
   position: relative;
   cursor: pointer;
+  box-shadow: 0 0 1px #333;
+  transition: background-color .2s;
 
   .card-item-left {
     width: 400px;
@@ -30,7 +33,7 @@ export const ArticleCardWrapper = styled.div`
     align-items: center;
     flex: 1;
     padding: 10px 20px;
-    color: #cccccc;
+    color: ${(props: any) => getCurrentFontColor(props.theme)};
     
     .card-item-introduce {
       text-align: left;
@@ -41,7 +44,7 @@ export const ArticleCardWrapper = styled.div`
     }
 
     h2 {
-      color: #cccccc;
+      color: ${(props: any) => getCurrentFontColor(props.theme)};
     }
   }
 
@@ -60,7 +63,7 @@ export const ArticleCardWrapper = styled.div`
         background-color: red;
       }
       &:nth-child(2) {
-        background-color: yellow;
+        background-color: orange;
       }
       &:nth-child(3) {
         background-color: green;

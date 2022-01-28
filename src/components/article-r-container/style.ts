@@ -1,22 +1,35 @@
+import { getCurrentCardBackground, getCurrentFontColor } from "@/utils/theme";
 import styled from "styled-components"
 
 export const ArticleRightContainerWrapper = styled.div`
-    background-color: rgba(50, 50, 50, .7);
-    padding: 10px 0;
+    background-color: ${(props: any) => getCurrentCardBackground(props.theme)};
+    padding: 5px 0;
     margin-bottom: 20px;
-    
+    box-shadow: 0 0 1px #333;
+    transition: background-color .2s;
+
     .container-title {
       border-bottom: 3px solid ${(props: any) => props.color};
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      i {
+      .container-title-left {
+        i {
         margin:0 10px;
         color: ${(props: any) => props.color};
         font-size: 20px;
       }
 
-      p {
-        color: #f9f9f9;
-        display: inline-block;
+        p {
+          color: ${(props: any) => getCurrentFontColor(props.theme)};
+          display: inline-block;
+        }
+      }
+      .container-title-right {
+        margin-right: 20px;
+        cursor: pointer;
+        color: #74b9ff;
       }
     }
     

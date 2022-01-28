@@ -1,10 +1,12 @@
 import { COLORS } from '@/common/colors';
+import { ThemeContext } from '@/common/context';
 import { formatCategory, formatTime } from '@/utils/format';
 import { Tag } from 'antd';
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import { ArticleCardWrapper } from "./style"
 
 export default memo(function ArticleCard(props: any) {
+  const theme = useContext(ThemeContext)
   const {
     ll_title,
     ll_introduce,
@@ -14,7 +16,7 @@ export default memo(function ArticleCard(props: any) {
     ll_cover } = props
 
   return (
-    <ArticleCardWrapper>
+    <ArticleCardWrapper theme={theme}>
       <div className="card-item-left">
         <img src={ll_cover} height={300} width={400} />
       </div>

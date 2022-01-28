@@ -16,7 +16,6 @@ export default memo(function (props: any) {
             <Badge
               key={index}
               className='mr-15'
-              size='small'
               count={categoryCounts[index].count}>
               <Tag color={DEEP_COLORS[index]}>{formatCategory(item.ll_category)}</Tag>
             </Badge>

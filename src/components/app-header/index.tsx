@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { memo, useContext } from 'react';
 import routes from "@/router"
 import Image from 'next/image';
+import { CSSTransition, SwitchTransition } from "react-transition-group"
+import { Tooltip } from 'antd';
 
 import {
   AppHeaderWrapper,
@@ -13,9 +16,11 @@ import { ThemeContext } from '@/common/context';
 import { getCurrentTheme } from '@/utils/theme';
 import logo from "@/assets/svg/logo.svg"
 
+
 const AppHeader = memo((props: any) => {
   // other hooks
   const theme = useContext(ThemeContext)
+  const router = useRouter()
   // render...
   return (
     <AppHeaderWrapper theme={getCurrentTheme(theme)}>
@@ -28,25 +33,39 @@ const AppHeader = memo((props: any) => {
           {
             routes.map((item, index) => {
               return (
-                <div key={index} className='nav-item'>
+                <div onClick={() => router.push(item.path)} key={index} className='nav-item'>
                   <i className={`iconfont ${item.icon}`}></i>
-                  <Link key={index} href={item.path}>{item.name}</Link>
+                  <span>{item.name}</span>
                 </div>
               )
             })
           }
-          <div className='nav-item'>
+          <a href="https://github.com/Acmenlei" className='nav-item'>
             <i className={`iconfont icon-github-fill`}></i>
-            <a href="https://github.com/Acmenlei">Github</a>
-          </div>
-          <div className='nav-item'>
+            <span>Github</span>
+          </a>
+          <div className='nav-item' onClick={() => router.push('/login')}>
             <i className={`iconfont icon-denglu`}></i>
-            <Link href="/login">登录</Link>
+            <span>登录</span>
           </div>
         </AppHeaderCenterWrapper>
-        {/* <AppHeaderRightWrapper>
-          <i className='iconfont icon-liebiao'></i>
-        </AppHeaderRightWrapper> */}
+
+        <AppHeaderRightWrapper>
+          <SwitchTransition>
+            <CSSTransition
+              classNames="theme"
+              key={theme === 'light' ? 'sunshine' : 'moon'}
+              timeout={300} >
+              <Tooltip placement="right" title={theme === 'light' ? '切换夜间模式' : '切换白天模式'}>
+                <Image
+                  onClick={props.changeTheme}
+                  src={require(`@/assets/svg/${theme === 'light' ? 'sunshine' : 'moon'}.svg`)}
+                  width={40}
+                  height={40} />
+              </Tooltip>
+            </CSSTransition>
+          </SwitchTransition>
+        </AppHeaderRightWrapper>
       </div>
     </AppHeaderWrapper>
   );

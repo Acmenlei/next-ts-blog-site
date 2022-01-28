@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const AppBackGroundWrapper = styled.div`
+export const AppDarkBackGroundWrapper = styled.div`
 
 height: 100vh;
 width: 100vw;

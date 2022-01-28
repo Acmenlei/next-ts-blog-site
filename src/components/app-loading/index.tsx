@@ -1,0 +1,34 @@
+import React, { memo } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
+import { SwitchTransition, CSSTransition } from "react-transition-group"
+
+import { AppLoadingWrapper } from "./style"
+
+export default memo(function AppLoading() {
+  // redux hook
+  const { requestLoading } = useSelector((state: any) => {
+    return {
+      requestLoading: state.getIn(["home", "requestLoading"])
+    }
+  }, shallowEqual)
+  return (
+    <SwitchTransition>
+      <CSSTransition 
+                  timeout={300} 
+                  classNames="loading" 
+                  key={requestLoading ? 'block' : 'none'}>
+        <div style={{ display: requestLoading ? 'block' : 'none' }}>
+          <AppLoadingWrapper>
+            <div className="load">
+              <hr />
+              <hr />
+              <hr />
+              <hr />
+            </div>
+          </AppLoadingWrapper>
+        </div>
+      </CSSTransition>
+    </SwitchTransition>
+
+  );
+});

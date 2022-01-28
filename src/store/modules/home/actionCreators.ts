@@ -8,3 +8,15 @@ export const increamentAction = (data?: any): ActionExtenal => {
     data
   }
 }
+// 显示加载
+export const hideLoadingAction = (): ActionExtenal => {
+  return {
+    type: ActionTypes.HIDE_LOADING
+  }
+}
+// 隐藏加载
+export const showLoadingAction = (): ActionExtenal => {
+  return {
+    type: ActionTypes.SHOW_LOADING
+  }
+}
