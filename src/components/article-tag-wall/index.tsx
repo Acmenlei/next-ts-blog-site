@@ -12,7 +12,7 @@ export default memo(function ArticleTagWall(props: any) {
     <ArticleRContainer title="标签墙" icon="iconfont icon-jieshao" color="orange">
       <ArticleTagWrapper >
         {
-          tagList.map((item: any, index: number) => {
+         tagList && tagList.map((item: any, index: number) => {
             return (
               <Tag
                 className='m-5'

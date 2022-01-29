@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 // local

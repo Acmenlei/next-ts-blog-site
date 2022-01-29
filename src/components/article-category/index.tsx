@@ -11,7 +11,7 @@ export default memo(function (props: any) {
   return (
     <ArticleRContainer title="文章类别" icon="iconfont icon-fenlei" color="green">
       {
-        categoryList.map((item: any, index: number) => {
+       categoryList && categoryList.map((item: any, index: number) => {
           return (
             <Badge
               key={index}

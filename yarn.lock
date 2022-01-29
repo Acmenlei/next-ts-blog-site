@@ -344,7 +344,7 @@
   resolved "https://registry.npmmirror.com/@rushstack/eslint-patch/download/@rushstack/eslint-patch-1.1.0.tgz#7f698254aadf921e48dda8c0a6b304026b8a9323"
   integrity sha1-f2mCVKrfkh5I3ajAprMEAmuKkyM=
 
-"@types/hoist-non-react-statics@^3.3.0":
+"@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.0":
   version "3.3.1"
   resolved "https://registry.npmmirror.com/@types/hoist-non-react-statics/download/@types/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
   integrity sha1-ESSq/lEYy1kZd66xzqrtEHDrA58=
@@ -386,10 +386,27 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
+"@types/redux-immutable@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.npmmirror.com/@types/redux-immutable/download/@types/redux-immutable-4.0.2.tgz#8c3c666c33130c6794280bc3dc7726bfa0cfacc7"
+  integrity sha512-nlnhJn9B+NtIemWnnNWO9arUioeHLNvYCADSSa+48c81y8VwutgHH3WHobX711KKrfhlMlEz3+Q9SYX3sxrYPg==
+  dependencies:
+    immutable "^4.0.0-rc.1"
+    redux "^4.0.0"
+
 "@types/scheduler@*":
   version "0.16.2"
   resolved "https://registry.npmmirror.com/@types/scheduler/download/@types/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha1-GmL4lSVyPd4kuhsBsJK/XfitTTk=
+
+"@types/styled-components@^5.1.21":
+  version "5.1.21"
+  resolved "https://registry.npmmirror.com/@types/styled-components/download/@types/styled-components-5.1.21.tgz#39f6bdc4103254d899531ef099dae5619b039cdb"
+  integrity sha512-lQzA0T6CaLXoeiOkSe2US2JfFgJV2/yJ8W1BaJubQQh2wdq7H+qScQQfbjURyLkgI1Ig+S/jRHCrWikfMHC6zA==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    csstype "^3.0.2"
 
 "@typescript-eslint/parser@^5.0.0":
   version "5.10.1"
@@ -1339,7 +1356,7 @@ ignore@^5.2.0:
   resolved "https://registry.npmmirror.com/ignore/download/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
 
-immutable@^4.0.0:
+immutable@^4.0.0, immutable@^4.0.0-rc.1:
   version "4.0.0"
   resolved "https://registry.npmmirror.com/immutable/download/immutable-4.0.0.tgz#b86f78de6adef3608395efb269a91462797e2c23"
   integrity sha512-zIE9hX70qew5qTUjSS7wi1iwj/l7+m54KWU247nhM3v806UdGj1yDndXj+IOYxxtW9zyLI+xqFNZjTuDaLUqFw==

@@ -1,10 +1,11 @@
+import { NextPage } from 'next';
 import React, { memo } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
 import { AppLoadingWrapper } from "./style"
 
-export default memo(function AppLoading() {
+const AppLoading: NextPage = memo(function () {
   // redux hook
   const { requestLoading } = useSelector((state: any) => {
     return {
@@ -13,10 +14,10 @@ export default memo(function AppLoading() {
   }, shallowEqual)
   return (
     <SwitchTransition>
-      <CSSTransition 
-                  timeout={300} 
-                  classNames="loading" 
-                  key={requestLoading ? 'block' : 'none'}>
+      <CSSTransition
+        timeout={300}
+        classNames="loading"
+        key={requestLoading ? 'block' : 'none'}>
         <div style={{ display: requestLoading ? 'block' : 'none' }}>
           <AppLoadingWrapper>
             <div className="load">
@@ -32,3 +33,5 @@ export default memo(function AppLoading() {
 
   );
 });
+
+export default AppLoading

@@ -14,7 +14,7 @@ export default memo(function ArticleRecent(props: any) {
     <ArticleRContainer title="最近文章" icon="iconfont icon-zuijinlaifang" color="yellow">
       <ArticleRecentWrapper color="purple" theme={theme}>
         {
-          recentList.map((item: any) => {
+         recentList && recentList.map((item: any) => {
             return (
               <Link key={item.ll_id} href={`/article/detail/${item.ll_id}`}>
                 <li>

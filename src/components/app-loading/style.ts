@@ -9,6 +9,7 @@ export const AppLoadingWrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 999;
+  opacity: .9;
 
 .load{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);
   width:100px;
@@ -26,7 +27,7 @@ export const AppLoadingWrapper = styled.div`
     background:#193B48
   }
 }
-.load hr{border:0;margin:0;width:40%;height:40%;position:absolute;border-radius:50%;animation:spin 2s ease infinite}
+.load hr{border:0;margin:0;width:30%;height:30%;position:absolute;border-radius:50%;animation:spin 2s ease infinite}
 
 @keyframes spin{
   0%,100%{transform:translate(0)}

@@ -12,6 +12,10 @@ export const AppHeaderWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     text-align: center;
+    span {
+      margin-top: 10px;
+      cursor: pointer;
+    }
   }
 `
 
@@ -45,6 +49,13 @@ export const AppHeaderCenterWrapper = styled.div`
     &:hover {
       opacity: .8;
       background-color: #333;
+    }
+  }
+  .ant-avatar {
+    & + span {
+      margin-top: 20px;
+      margin-left: 5px;
+      color: #ccc;
     }
   }
   

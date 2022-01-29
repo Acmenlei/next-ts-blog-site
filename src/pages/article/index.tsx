@@ -41,7 +41,7 @@ const Article: NextPage = memo((props: any) => {
     <ArticleWrapper>
       <div className="article-left">
         {
-          articleList.map((item: any) => {
+          articleList && articleList.map((item: any) => {
             return (
               <div onClick={() => routerJump(item.ll_id)}>
                 <ArticleCard

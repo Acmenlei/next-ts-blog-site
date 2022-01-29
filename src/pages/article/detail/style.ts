@@ -18,6 +18,7 @@ export const ArticleDetailWrapper = styled.div`
   background-color: ${(props: any) => getCurrentCardBackground(props.theme)};
   transition: background-color .2s;
 `
+const DETAIL_THEME_ACTIVE = "#eb4d4b"
 
 export const ArticleDetailContent = styled.div`
     flex: 1;
@@ -42,7 +43,7 @@ export const ArticleDetailContent = styled.div`
       &::after {
         content: "";
         left: 8px;
-        background-color: #eb4d4b;
+        background-color: ${DETAIL_THEME_ACTIVE};
       }
       &::before {
         content: "";
@@ -59,7 +60,7 @@ export const ArticleDetailContent = styled.div`
           border-radius: 50%;
           content: "";
           left: 48px;
-          background-color: #4cd137;
+          background-color: ${DETAIL_THEME_ACTIVE};
         }
       }
     }
@@ -69,7 +70,7 @@ export const ArticleDetailContent = styled.div`
       font-size: 16px;
       
       code {
-        color: #eb4d4b;
+        color: ${DETAIL_THEME_ACTIVE};
         margin: 0 3px;
         text-shadow: 0 0 5px ${(props: any) => props.theme == 'dark' ? 'gray' : 'pink'};
       }
@@ -83,15 +84,32 @@ export const ArticleDetailContent = styled.div`
     }
     h1 {
       font-size: 35px;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
+      &::before {
+        content: "# ";
+        color: ${DETAIL_THEME_ACTIVE};
+        font-size: .5em;
+      }
     }
     h2 {
       font-size: 28px;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #eb4d4b;
+      margin-bottom: 30px;
+      border-bottom: 2px solid ${DETAIL_THEME_ACTIVE};
+      &::before {
+        content: "## ";
+        font-size: .8em;
+        color: ${DETAIL_THEME_ACTIVE};
+      }
+      
     }
     h3 {
       font-size: 20px;
+      margin-bottom: 20px;
+      &::before {
+        content: "### ";
+        font-size: .8em;
+        color: ${DETAIL_THEME_ACTIVE};
+      }
     }
 
     img {
