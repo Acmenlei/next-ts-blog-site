@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "@/store"
 import { hideLoadingAction, showLoadingAction } from "@/store/modules/home/actionCreators";
+import { errorMessage } from "@/common/message";
 
 const service = axios.create({
   baseURL: 'http://localhost:9001',
@@ -26,6 +27,7 @@ export const get = (url: string, params: any = {}) => {
       resolve(res);
     }, err => {
       reject(err)
+      errorMessage("网络错误")
       store.dispatch(hideLoadingAction())
     })
   })
@@ -36,6 +38,7 @@ export const post = (url: string, data: any = {}) => {
     service.post(url, data).then(res => {
       resolve(res);
     }, err => {
+      errorMessage("网络错误")
       reject(err)
       store.dispatch(hideLoadingAction())
     })

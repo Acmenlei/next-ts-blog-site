@@ -43,9 +43,8 @@ const Article: NextPage = memo((props: any) => {
         {
           articleList && articleList.map((item: any) => {
             return (
-              <div onClick={() => routerJump(item.ll_id)}>
+              <div key={item.ll_id} onClick={() => routerJump(item.ll_id)}>
                 <ArticleCard
-                  key={item.ll_id}
                   ll_title={item.ll_title}
                   ll_introduce={item.ll_introduce}
                   ll_cover={item.ll_cover}

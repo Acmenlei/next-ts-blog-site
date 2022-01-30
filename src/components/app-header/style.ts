@@ -69,11 +69,16 @@ export const AppHeaderRightWrapper = styled.div`
   overflow: hidden;
   
   img {
-    transition: transform 1s;
-    
-    &:hover {
-    transform: rotate(360deg);
+    animation: rotate-slow 10s linear infinite;
   }
+
+  @keyframes rotate-slow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .theme-enter {

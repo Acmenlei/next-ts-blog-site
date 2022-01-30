@@ -39,10 +39,14 @@ const Login: NextPage = memo(() => {
   const onFinishLogin = useCallback(() => {
     // redux-thunk 莫名不起效果 暂时这么写。
     userLoginVerify({ ll_username: username, ll_password: password })
-      .then(({ data, msg }: any) => {
-        dispatch(userLoginAction(data))
-        successMessage(msg)
-        router.back() // 退回刚才的页面
+      .then(({ data, code, msg }: any) => {
+        if (code != 200) {
+          warningMessage(msg)
+        } else {
+          dispatch(userLoginAction(data))
+          successMessage(msg)
+          router.back() // 退回刚才的页面
+        }
       })
   }, [username, password, dispatch])
   // 注册框逻辑
@@ -72,7 +76,7 @@ const Login: NextPage = memo(() => {
                 <button onClick={onFinishLogin}>登录</button>
                 <button onClick={changeLogin}>去注册</button>
               </div>
-             
+
             </LoginWrapper> :
             <RegisterWrapper>
               <h2>注册</h2>

@@ -4,6 +4,11 @@ export const formatTime = (time: string) => {
   return moment(time).format("YYYY-MM-DD HH:mm:ss")
 }
 
+// 从当前时间开始计算 天数
+export const formatTimeFromNow = (time: string) => {
+  return moment(time).fromNow()
+}
+
 export const formatCategory = (category: string) => {
   switch (category) {
     case "share":

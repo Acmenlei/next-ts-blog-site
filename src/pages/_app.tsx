@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Provider } from "react-redux"
 import "antd/dist/antd.css"
+import 'moment/locale/zh-cn'
 
 import "@/assets/css/reset.css"
 import "@/assets/font/iconfont.css"
