@@ -58,7 +58,6 @@ export default memo(function BoardComment(props: any) {
     setReplyContent("")
     setIsModalVisible(false)
   }, [])
-  // console.log("判断是否相等：",  userInfo.ll_username)
   // action操作的JSX内容
   const ActionJSX = ({ ll_id, ll_level, ll_username, ll_nick_name }: any) => {
     return [
@@ -81,10 +80,11 @@ export default memo(function BoardComment(props: any) {
     let pre = '1px solid '
     return pre += theme == 'light' ? '#eee' : '#444'
   }, [theme])
+
   return (
     <>
       {
-        commentsList ? <CommentWrapper>
+        (commentsList && commentsList.length) ? <CommentWrapper>
           <TransitionGroup>
             {
               commentsList && commentsList.map((item: any) => {

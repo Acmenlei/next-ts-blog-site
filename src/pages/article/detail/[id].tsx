@@ -23,23 +23,33 @@ import BoardComment from '@/components/board-comment';
 
 const ArticleDetail: NextPage = memo((props: any) => {
   // redux hook
-  const dispatch = useDispatch()
   const { userInfo } = useSelector((state: any) => {
     return {
       userInfo: state.getIn(["login", "userInfo"])
     }
   })
-  const { articleDetail, articleComments, total } = props
+  const { articleDetail } = props
+  // const { articleDetail, articleComments, total } = props
+  const [articleComments, setArticleComments] = useState(props.articleComments)
+  const [total, setTotal] = useState(props.total)
+  const [content, setContent] = useState("")
+
+
   const theme = useContext(ThemeContext)
   useEffect(() => {
     (codeRef.current as HTMLElement).innerHTML = articleDetail.ll_content_html
   }, [articleDetail])
   // console.log(userInfo, "相等")
   const codeRef = createRef()
-  const [content, setContent] = useState("")
   const router = useRouter()
   const articleId = useMemo(() => router.query.id, [router])
 
+  // 请求所有文章评论数据
+  const resetArticleCommentList = useCallback(async () => {
+    const { data, total }: any = await fetchAllArticleCommentList({ ll_id: articleId })
+    setArticleComments(data)
+    setTotal(total)
+  }, [articleId])
   // 发表文章评论逻辑
   const publishArticleComment = useCallback(async () => {
     if (!userInfo) {
@@ -59,7 +69,8 @@ const ArticleDetail: NextPage = memo((props: any) => {
     })
     if (code == 200) {
       successMessage(msg)
-      // articleCommentPublish()
+      // 请求数据 设置给state
+      resetArticleCommentList()
     }
     setContent("")
   }, [userInfo, content, articleId])
@@ -71,9 +82,9 @@ const ArticleDetail: NextPage = memo((props: any) => {
       ll_username: username,
       ll_article_id: articleId
     })
-    if(code === 200) {
+    if (code === 200) {
       successMessage(msg)
-      // 后续
+      resetArticleCommentList()
     }
   }, [articleId])
   // 回复文章评论逻辑
@@ -92,8 +103,9 @@ const ArticleDetail: NextPage = memo((props: any) => {
       ll_p_nick_name: nickName,
       ll_article_id: articleId
     })
-    if(code == 200) {
+    if (code == 200) {
       successMessage(msg)
+      resetArticleCommentList()
     }
   }, [userInfo, articleId])
   return (
@@ -103,25 +115,26 @@ const ArticleDetail: NextPage = memo((props: any) => {
         <p>最后编辑时间：{formatTime(articleDetail.ll_updatedTime)}</p>
       </ArticleDescWrapper>
       <ArticleDetailWrapper theme={theme}>
-        <div className='content-container'>
-          <ArticleDetailContent ref={codeRef} theme={theme}>
-          </ArticleDetailContent>
-          <p>评论区</p>
-          <TextArea
-            value={content}
-            placeholder='你想对我说什么？'
-            rows={5}
-            showCount
-            maxLength={200}
-            onChange={e => setContent(e.target.value)} />
-          <Button
-            className='mt-15'
-            type="primary"
-            onClick={publishArticleComment}>发表</Button>
-          <BoardComment
-            removeComment={removeComment}
-            reply={reply}
-            commentsList={articleComments} />
+        <div className='article-container'>
+          <ArticleDetailContent ref={codeRef} theme={theme} />
+          <div className='content-container'>
+            <p>共&nbsp;{total}&nbsp;条评论</p>
+            <TextArea
+              value={content}
+              placeholder='你想对我说什么？'
+              rows={5}
+              showCount
+              maxLength={200}
+              onChange={e => setContent(e.target.value)} />
+            <Button
+              className='mt-15'
+              type="primary"
+              onClick={publishArticleComment}>发表</Button>
+            <BoardComment
+              removeComment={removeComment}
+              reply={reply}
+              commentsList={articleComments} />
+          </div>
         </div>
         <Affix offsetTop={55}>
           <ArticleDetailOutLine theme={theme}>

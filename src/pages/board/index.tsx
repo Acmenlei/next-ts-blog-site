@@ -1,41 +1,36 @@
 import { Button, Pagination } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { NextPage } from 'next';
-import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import React, { memo, useCallback, useContext, useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { successMessage, warningMessage } from '@/common/message';
 import { MessageBoardWrapper } from "./style"
-
-import BoardComment from '@/components/board-comment';
 import { delComment, publishComment, queryComments, replyComment } from '@/services/modules/comment';
-import { requestCommentListAction } from '@/store/modules/board/actionCreators';
 import { ThemeContext } from '@/common/context';
 
-const MessageBoard: NextPage = memo(() => {
+import BoardComment from '@/components/board-comment';
+
+const MessageBoard: NextPage = memo((props: any) => {
   // redux hooks
-  const dispatch = useDispatch()
-  const { userInfo, commentsList, total } = useSelector((state: any) => {
+  const { userInfo } = useSelector((state: any) => {
     return {
-      userInfo: state.getIn(["login", "userInfo"]),
-      commentsList: state.getIn(["board", "commentsList"]),
-      total: state.getIn(["board", "total"]),
+      userInfo: state.getIn(["login", "userInfo"])
     }
   }, shallowEqual)
-
   const theme = useContext(ThemeContext)
   const [content, setContent] = useState("")
   const [pageNum, setPageNum] = useState(1)
+  const [commentsList, setCommentsList] = useState(props.commentsList)
+  const [total, setTotal] = useState(props.total)
 
-  useEffect(() => {
-    queryComments({ pageNum, pageSize: 10 }).then(({ data, total }: any) => {
-      console.log(data)
-      dispatch(requestCommentListAction({ data, total }))
-    })
+  const resetCommentsList = useCallback(async (page) => {
+    const { data, total }: any = await queryComments({ pageNum: page, pageSize: 10 })
+    setTotal(total)
+    setCommentsList(data)
   }, [])
-
   // 发表留言
-  const publishMessage = async () => {
+  const publishMessage = useCallback(async () => {
     // 判断是否登录
     if (!userInfo) {
       // 未登录
@@ -53,9 +48,8 @@ const MessageBoard: NextPage = memo(() => {
       setContent("")
     }
     // 本应该抽俩出去 但是redux-thunk 不起效 暂时先这么写
-    const { data, total }: any = await queryComments({ pageNum, pageSize: 10 })
-    dispatch(requestCommentListAction({ data, total }))
-  }
+    resetCommentsList(pageNum)
+  }, [userInfo, content, pageNum])
   // 删除留言(level1/level2)（没登录的情况下不开放显示）如果是一级留言 那么它的子集都要被删除
   const removeComment = useCallback(async ({ id, level, username }) => {
     const { code, msg }: any = await delComment({
@@ -66,11 +60,9 @@ const MessageBoard: NextPage = memo(() => {
     // console.log(code, "执行删除")
     if (code === 200) {
       successMessage(msg)
-      // parentIdx ? data[parentIdx].children.splice(selfIdx, 1) : data.splice(selfIdx, 1) // 删除当前留言
-      const { data, total }: any = await queryComments({ pageNum, pageSize: 10 })
-      dispatch(requestCommentListAction({ data, total })) // 重新修改redux
+      resetCommentsList(pageNum)
     }
-  }, [dispatch, commentsList])
+  }, [pageNum])
   // 回复留言
   const reply = useCallback(async (id, username, nickName, content) => {
     if (!userInfo) {
@@ -89,18 +81,16 @@ const MessageBoard: NextPage = memo(() => {
     })
     if (code === 200) {
       // 重新拉取一下数据
-      const { data, total }: any = await queryComments({ pageNum, pageSize: 10 })
-      dispatch(requestCommentListAction({ data, total }))
       successMessage(msg)
+      resetCommentsList(pageNum)
     }
-  }, [userInfo])
+  }, [userInfo, pageNum])
   // 分页
-  const pageNumChange = async (pageNum: number) => {
+  const pageNumChange = useCallback((pageNum: number) => {
     setPageNum(pageNum)
     // 重新拉取一下数据
-    const { data, total }: any = await queryComments({ pageNum, pageSize: 10 })
-    dispatch(requestCommentListAction({ data, total }))
-  }
+    resetCommentsList(pageNum)
+  },[])
   return (
     <MessageBoardWrapper theme={theme}>
       <TextArea
@@ -126,11 +116,19 @@ const MessageBoard: NextPage = memo(() => {
                       showTotal={(total) => `共${total}条`}
                       pageSize={10}
                       current={pageNum}
-                      onChange={(num) => pageNumChange(num)}
+                      onChange={pageNumChange}
                       total={total} />
       }
     </MessageBoardWrapper>
   );
 });
+
+MessageBoard.getInitialProps = async () => {
+  const commentsList: any = await queryComments({ pageNum: 1, pageSize: 10 })
+  return {
+    commentsList: commentsList.data,
+    total: commentsList.total
+  }
+}
 
 export default MessageBoard

@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const CommentWrapper =  styled.div`
     padding: 10px 0;
-    
+
     .comment-item-enter {
         opacity: 0;
         transform: scale(.6);

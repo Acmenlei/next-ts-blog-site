@@ -24,7 +24,6 @@ const Article: NextPage = memo((props: any) => {
   const router = useRouter()
 
   const routerJump = (id: string) => {
-    console.log("router start jump")
     router.push(`/article/detail/${id}`)
   }
 

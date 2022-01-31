@@ -17,12 +17,20 @@ export const ArticleDetailWrapper = styled.div`
   overflow: hidden;
   background-color: ${(props: any) => getCurrentCardBackground(props.theme)};
   transition: background-color .2s;
+  border-radius: 8px;
+
+    .article-container {
+      flex: 1;
+    }
+  .content-container {
+    margin: 20px;
+    color: ${(props: any) => getCurrentFontColor(props.theme)};
+  }
 `
 const DETAIL_THEME_ACTIVE = "#eb4d4b"
 
 export const ArticleDetailContent = styled.div`
-    flex: 1;
-    padding: 10px;
+    padding: 20px;
     border-right: 1px solid ${(props: any) => props.theme == 'dark' ? '#666' : '#ccc'};
     color: ${(props: any) => getCurrentFontColor(props.theme)};
     
@@ -60,7 +68,7 @@ export const ArticleDetailContent = styled.div`
           border-radius: 50%;
           content: "";
           left: 48px;
-          background-color: ${DETAIL_THEME_ACTIVE};
+          background-color: lightgreen;
         }
       }
     }
@@ -138,7 +146,6 @@ export const ArticleDetailOutLine = styled.div`
         cursor: pointer;
 
         &:hover, &.active {
-          
           text-decoration: inherit;
         }
 
