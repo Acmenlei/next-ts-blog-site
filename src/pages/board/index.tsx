@@ -116,7 +116,6 @@ const MessageBoard: NextPage = memo(() => {
         onClick={publishMessage}>发表</Button>
       {/* 留言板内容 */}
       <BoardComment
-        currentUserInfo={userInfo}
         commentsList={commentsList}
         removeComment={removeComment}
         reply={reply} />

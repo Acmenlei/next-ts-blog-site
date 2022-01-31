@@ -6,11 +6,17 @@ import { formatTime, formatTimeFromNow } from '@/utils/format';
 import { CommentWrapper } from './style';
 import TextArea from 'antd/lib/input/TextArea';
 import { ThemeContext } from '@/common/context';
-import { getCurrentFontColor, getCurrentNickNameColor } from '@/utils/theme';
+import { getCurrentNickNameColor } from '@/utils/theme';
+import { useSelector } from 'react-redux';
 
 export default memo(function BoardComment(props: any) {
   // redux hook
-  const { commentsList, currentUserInfo } = props
+  const { userInfo } = useSelector((state: any) => {
+    return {
+      userInfo: state.getIn(["login", "userInfo"])
+    }
+  })
+  const { commentsList } = props
   const [modal, contextHolder] = Modal.useModal();
   const [replyContent, setReplyContent] = useState((""))
   const [pId, setPid] = useState(-1)
@@ -52,11 +58,12 @@ export default memo(function BoardComment(props: any) {
     setReplyContent("")
     setIsModalVisible(false)
   }, [])
+  // console.log("判断是否相等：",  userInfo.ll_username)
   // action操作的JSX内容
   const ActionJSX = ({ ll_id, ll_level, ll_username, ll_nick_name }: any) => {
     return [
       // 只有评论者自己才能删除评论 当然还有站长
-      currentUserInfo && currentUserInfo.ll_username == ll_username &&
+      userInfo && userInfo.ll_username == ll_username &&
       <span
         style={{ color: getCurrentNickNameColor(theme) }}
         onClick={() => isRemoveComment(() => props.removeComment({
@@ -108,7 +115,7 @@ export default memo(function BoardComment(props: any) {
 
                             <Comment
                               key={citem.ll_id}
-                              actions={ActionJSX({ ll_id: citem.ll_id, ll_level: citem.ll_level, ll_nick_name: citem.ll_nick_name, ll_username })}
+                              actions={ActionJSX({ ll_id, ll_level: citem.ll_level, ll_nick_name: citem.ll_nick_name, ll_username })}
                               author={<a href='#!' style={{color: getCurrentNickNameColor(theme)}}>{citem.ll_nick_name}</a>}
                               avatar={citem.ll_avatar}
                               // 二级留言内容 前缀@
