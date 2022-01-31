@@ -17,3 +17,8 @@ export function getCurrentCardBackground(color: string) {
 export function getReflectTheme(color: string) {
   return color === 'light' ? 'dark' : 'light';
 }
+
+// 修改留言版的nickname
+export function getCurrentNickNameColor(color: string) {
+  return color === 'light' ? '#567' : '#999';
+}
