@@ -1,9 +1,9 @@
 import React, { memo, useCallback, useState } from 'react';
 import { NextPage } from 'next';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
-import { ContainerWrapper, LoginWrapper, RegisterWrapper } from "./style";
+import { OutContainerWrapper, ContainerWrapper, LoginWrapper, RegisterWrapper } from "./style";
 import { userLoginVerify, userRegister } from '@/services/modules/login';
 import { userLoginAction } from '@/store/modules/login/actionCreators';
 import { errorMessage, successMessage, warningMessage } from '@/common/message';
@@ -12,12 +12,6 @@ import { useRouter } from 'next/router';
 const Login: NextPage = memo(() => {
   // redux hooks
   const dispatch = useDispatch()
-  // const { userInfo } = useSelector((state: any) => {
-  //   return {
-  //     userInfo: state.getIn(["login", "userInfo"])
-  //   }
-  // }, shallowEqual)
-
   // other hooks
   const [isLogin, setIsLogin] = useState(true)
   const [username, setUsername] = useState("")
@@ -45,7 +39,7 @@ const Login: NextPage = memo(() => {
         } else {
           dispatch(userLoginAction(data))
           successMessage(msg)
-          router.back() // 退回刚才的页面
+          router.reload()
         }
       })
   }, [username, password, dispatch])
@@ -64,33 +58,35 @@ const Login: NextPage = memo(() => {
   }, [username, password])
 
   return (
-    <ContainerWrapper>
-      <SwitchTransition>
-        <CSSTransition classNames="login" timeout={300} key={isLogin}>
-          {isLogin ?
-            <LoginWrapper>
-              <h2>登录</h2>
-              <input placeholder='请输入用户名' id='username' type="text" onChange={e => changeUsername(e.target.value)} />
-              <input placeholder='请输入密码' id='password' type="password" onChange={e => changePassword(e.target.value)} />
-              <div>
-                <button onClick={onFinishLogin}>登录</button>
-                <button onClick={changeLogin}>去注册</button>
-              </div>
+    <OutContainerWrapper>
+      <ContainerWrapper>
+        <SwitchTransition>
+          <CSSTransition classNames="login" timeout={300} key={isLogin}>
+            {isLogin ?
+              <LoginWrapper>
+                <h2>登录</h2>
+                <input placeholder='请输入用户名' id='username' type="text" onChange={e => changeUsername(e.target.value)} />
+                <input placeholder='请输入密码' id='password' type="password" onChange={e => changePassword(e.target.value)} />
+                <div>
+                  <button onClick={onFinishLogin}>登录</button>
+                  <button onClick={changeLogin}>去注册</button>
+                </div>
 
-            </LoginWrapper> :
-            <RegisterWrapper>
-              <h2>注册</h2>
-              <input placeholder='请输入用户名' id='username' type="text" onChange={e => changeUsername(e.target.value)} />
-              <input placeholder='请输入密码' id='password' type="password" onChange={e => changePassword(e.target.value)} />
-              <div>
-                <button onClick={onFinishRegister}>注册</button>
-                <button onClick={changeLogin}>去登录</button>
-              </div>
-            </RegisterWrapper>
-          }
-        </CSSTransition>
-      </SwitchTransition>
-    </ContainerWrapper>
+              </LoginWrapper> :
+              <RegisterWrapper>
+                <h2>注册</h2>
+                <input placeholder='请输入用户名' id='username' type="text" onChange={e => changeUsername(e.target.value)} />
+                <input placeholder='请输入密码' id='password' type="password" onChange={e => changePassword(e.target.value)} />
+                <div>
+                  <button onClick={onFinishRegister}>注册</button>
+                  <button onClick={changeLogin}>去登录</button>
+                </div>
+              </RegisterWrapper>
+            }
+          </CSSTransition>
+        </SwitchTransition>
+      </ContainerWrapper>
+    </OutContainerWrapper>
   );
 });
 

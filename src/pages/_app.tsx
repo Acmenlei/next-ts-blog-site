@@ -1,4 +1,6 @@
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import { BackTop, Tooltip } from 'antd'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Provider } from "react-redux"
 import "antd/dist/antd.css"
@@ -6,17 +8,16 @@ import 'moment/locale/zh-cn'
 
 import "@/assets/css/reset.css"
 import "@/assets/font/iconfont.css"
+
 import { ThemeContext } from '@/common/context'
 import { getReflectTheme } from '@/utils/theme'
 import store from "@/store"
-
+import { isLoginStatus } from '@/services/modules/login'
+import { userLoginAction } from '@/store/modules/login/actionCreators'
 import AppHeader from '@/components/app-header'
 import AppBackGround from '@/components/app-background'
 import AppLoading from '@/components/app-loading'
-import { useRouter } from 'next/router'
-import { isLoginStatus } from '@/services/modules/login'
-import { userLoginAction } from '@/store/modules/login/actionCreators'
-import { BackTop, Tooltip } from 'antd'
+import AppFooter from '@/components/app-footer'
 
 const App = memo(function ({ Component, pageProps }: AppProps) {
   // other hook
@@ -25,8 +26,8 @@ const App = memo(function ({ Component, pageProps }: AppProps) {
   const changeTheme = useCallback(() => {
     setTheme(getReflectTheme(theme))
   }, [theme])
-  // const router = useRouter()
-  // 判断是否已登录 已登录则获取登录信息 
+  const router = useRouter()
+
   useEffect(() => {
     const state: any = store.getState()
     const userInfo = state.getIn(["login", "userInfo"])
@@ -36,25 +37,25 @@ const App = memo(function ({ Component, pageProps }: AppProps) {
       })
     }
     // 路由控制
-    // const routerEvents = router.events
-    // routerEvents.on("routeChangeStart", (path) => {
-    //   console.log(path)
-    // })
-    // return () => {
-    //   routerEvents.off("routeChangeStart", (route) => {
-    //     console.log("销毁", route)
-    //   })
-    // }
+    router.beforePopState(({ url }) => {
+      if (url === '/login') {
+        // 判断是已登录
+        if (userInfo) {
+          return false
+        }
+      }
+      return true
+    })
   }, [store])
 
   return (
-
     <ThemeContext.Provider value={theme}>
       <Provider store={store}>
         <AppHeader changeTheme={changeTheme} />
         <div className='container-wrap mt-20 pb-20'>
           <Component {...pageProps} />
         </div>
+        { router.pathname != '/' && <AppFooter /> }
         <AppBackGround />
         <AppLoading />
       </Provider>

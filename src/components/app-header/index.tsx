@@ -45,7 +45,7 @@ const AppHeader = memo((props: any) => {
   const LoginOrAvatar = () => {
     if (!userInfo) {
       return (
-        <div className='nav-item' onClick={() => router.push('/login')}>
+        <div className='nav-item' onClick={() => router.replace('/login')}>
           <i className={`iconfont icon-denglu`}></i>
           <span>登录</span>
         </div>
@@ -68,7 +68,7 @@ const AppHeader = memo((props: any) => {
     <AppHeaderWrapper theme={getCurrentTheme(theme)}>
       <div className='container-wrap nav'>
         <AppHeaderLeftWrapper>
-          <Image width={50} height={50} src={logo} />
+          <Image onClick={() => router.push("/")} width={50} height={50} src={logo} />
           <span className='logo-desc'>CODERLEI</span>
         </AppHeaderLeftWrapper>
         <AppHeaderCenterWrapper>

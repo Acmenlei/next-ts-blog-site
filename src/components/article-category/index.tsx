@@ -14,10 +14,12 @@ export default memo(function (props: any) {
        categoryList && categoryList.map((item: any, index: number) => {
           return (
             <Badge
-              key={index}
-              className='mr-15'
-              count={categoryCounts[index].count}>
-              <Tag color={DEEP_COLORS[index]}>{formatCategory(item.ll_category)}</Tag>
+                key={index}
+                className='mr-15'
+                count={categoryCounts[index].count}>
+              <Tag 
+                onClick={() => props.searchArticle({ ll_category: item.ll_category })} 
+                color={DEEP_COLORS[index]}>{formatCategory(item.ll_category)}</Tag>
             </Badge>
           )
         })

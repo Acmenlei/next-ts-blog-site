@@ -1,24 +1,32 @@
 import type { NextPage } from 'next'
 import { memo } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Button } from 'antd';
+import { IndexWrapper } from './style'
 // local
-import { fetchHomeCounter } from "@/services/modules/home"
 
 const Home: NextPage = memo(() => {
-  // redux hook
-  const { counter } = useSelector((state: any) => {
-    return {
-      counter: state.getIn(["home", "counter"])
-    }
-  }, shallowEqual)
-  // other hook
-  const dispatch = useDispatch()
   return (
-    <>
-      <p>{counter}</p>
-      <Button onClick={() => dispatch((fetchHomeCounter(1)))}>++</Button>
-    </>
+    <IndexWrapper>
+      <div className="message">
+        你好 欢迎来到这里 希望这里的文章对你有所帮助 祝你一切顺利～
+      </div>
+      <div className="usagi">
+        <div className="head">
+          <div className="wrap">
+            <div className="flush"></div>
+            <div className="face"></div>
+            <div className="mouth"></div>
+            <div className="nose"></div>
+          </div>
+        </div>
+      </div>
+      <div className="piske">
+        <div className="head">
+          <div className="eyes"></div>
+          <div className="flush"></div>
+          <div className="mouth"></div>
+        </div>
+      </div>
+    </IndexWrapper>
   );
 })
 

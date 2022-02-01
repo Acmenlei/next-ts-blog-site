@@ -1,10 +1,15 @@
 import styled from "styled-components"
 
+export const OutContainerWrapper = styled.div`
+    height: calc(100vh - 190px);
+`
+
 export const ContainerWrapper = styled.div`
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
+  // height: 100vh;
   overflow: hidden;
   background: #FFFFFF;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.24) inset;
