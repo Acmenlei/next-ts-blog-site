@@ -11,10 +11,11 @@ export const ArticleCardWrapper = styled.div`
   cursor: pointer;
   box-shadow: 0 0 1px #333;
   transition: background-color .2s;
+  border-radius: 8px;
 
   .card-item-left {
     width: 400px;
-  overflow: hidden;
+    overflow: hidden;
 
     img {
       transition: transform .3s;
@@ -45,6 +46,12 @@ export const ArticleCardWrapper = styled.div`
 
     h2 {
       color: ${(props: any) => getCurrentFontColor(props.theme)};
+    }
+
+    .card-item-tags {
+      .ant-tag {
+        margin-bottom: 5px;
+      }
     }
   }
 

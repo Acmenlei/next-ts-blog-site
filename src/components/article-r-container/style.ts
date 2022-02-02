@@ -7,7 +7,8 @@ export const ArticleRightContainerWrapper = styled.div`
     margin-bottom: 20px;
     box-shadow: 0 0 1px #333;
     transition: background-color .2s;
-
+    border-radius: 8px;
+    
     .container-title {
       border-bottom: 3px solid ${(props: any) => props.color};
       display: flex;

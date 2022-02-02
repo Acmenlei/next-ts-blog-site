@@ -22,10 +22,10 @@ export const ArticleDetailWrapper = styled.div`
     .article-container {
       flex: 1;
     }
-  .content-container {
-    margin: 20px;
-    color: ${(props: any) => getCurrentFontColor(props.theme)};
-  }
+    .content-container {
+      margin: 20px;
+      color: ${(props: any) => getCurrentFontColor(props.theme)};
+    }
 `
 const DETAIL_THEME_ACTIVE = "#eb4d4b"
 
@@ -73,7 +73,7 @@ export const ArticleDetailContent = styled.div`
       }
     }
 
-    p {
+    p,li {
       line-height: 26px;
       font-size: 16px;
       
@@ -83,7 +83,31 @@ export const ArticleDetailContent = styled.div`
         text-shadow: 0 0 5px ${(props: any) => props.theme == 'dark' ? 'gray' : 'pink'};
       }
     }
-    
+
+    li {
+      font-size: 15px;
+    }
+    >p, >ol {
+      margin-bottom: 30px;
+    }
+    blockquote {
+      background-color: #eee;
+      position: relative;
+      color: ${(props: any) => props.theme == 'light' ? '#333' : '#000'};
+      p {
+        padding: 8px 10px;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 5px;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: #ccc;
+      }
+    }
     strong {
       margin: 0 3px;
     }
@@ -91,18 +115,19 @@ export const ArticleDetailContent = styled.div`
       color: inherit;
     }
     h1 {
-      font-size: 35px;
-      margin-bottom: 40px;
+      font-size: 30px;
+      margin-bottom: 25px;
+      border-bottom: 2px solid ${DETAIL_THEME_ACTIVE};
+
       &::before {
         content: "# ";
         color: ${DETAIL_THEME_ACTIVE};
-        font-size: .5em;
+        font-size: 1em;
       }
     }
     h2 {
-      font-size: 28px;
-      margin-bottom: 30px;
-      border-bottom: 2px solid ${DETAIL_THEME_ACTIVE};
+      font-size: 22px;
+      margin-bottom: 20px;
       &::before {
         content: "## ";
         font-size: .8em;
@@ -115,7 +140,25 @@ export const ArticleDetailContent = styled.div`
       margin-bottom: 20px;
       &::before {
         content: "### ";
-        font-size: .8em;
+        font-size: .7em;
+        color: ${DETAIL_THEME_ACTIVE};
+      }
+    }
+    h4 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      &::before {
+        content: "#### ";
+        font-size: .6em;
+        color: ${DETAIL_THEME_ACTIVE};
+      }
+    }
+    h5 {
+      font-size: 15px;
+      margin-bottom: 20px;
+      &::before {
+        content: "##### ";
+        font-size: .5em;
         color: ${DETAIL_THEME_ACTIVE};
       }
     }
@@ -161,13 +204,13 @@ export const ArticleDetailOutLine = styled.div`
 
     .title-level1 {
       color: green;
-      font-size: 1.2em;
+      font-size: 1em;
       padding-left: 1em;
       font-weight: normal;
     }
 
      .title-level2 {
-      font-size: 1em;
+      font-size: .9em;
       padding-left: 1em;
       font-weight: normal;
     }

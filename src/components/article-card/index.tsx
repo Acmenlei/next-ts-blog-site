@@ -24,7 +24,7 @@ export default memo(function ArticleCard(props: any) {
         <h2>{ll_title}</h2>
         <p className='card-item-introduce'>{ll_introduce}</p>
         <p>{formatTime(ll_createdTime)}</p>
-        <p>
+        <p className='card-item-tags'>
           <strong>标签：</strong>
           {
             ll_tags.split(",").map((item: any, index: number) => {
