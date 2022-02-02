@@ -3,6 +3,9 @@ import { useRouter } from 'next/router'
 import { BackTop, Tooltip } from 'antd'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Provider } from "react-redux"
+import nProgress from "nprogress"
+import "nprogress/nprogress.css"
+
 import "antd/dist/antd.css"
 import 'moment/locale/zh-cn'
 
@@ -36,16 +39,27 @@ const App = memo(function ({ Component, pageProps }: AppProps) {
         store.dispatch(userLoginAction(data))
       })
     }
-    // 路由控制
+    // 路由控制权限控制
     router.beforePopState(({ url }) => {
       if (url === '/login') {
         // 判断是已登录
-        if (userInfo) {
-          return false
-        }
+        if (userInfo) return false
       }
       return true
     })
+    // 路由跳转进度
+    const Events = router.events
+    Events.on("routeChangeStart", () => {
+      nProgress.start()
+    })
+    Events.on("routeChangeComplete", () => {
+      nProgress.done()
+    })
+
+    return () => {
+      Events.off("routeChangeStart", () => { })
+      Events.off("routeChangeComplete", () => { })
+    }
   }, [store])
 
   return (
@@ -55,7 +69,7 @@ const App = memo(function ({ Component, pageProps }: AppProps) {
         <div className='container-wrap mt-20 pb-20'>
           <Component {...pageProps} />
         </div>
-        { (!['/', '/login'].includes(router.pathname)) && <AppFooter /> }
+        {(!['/', '/login'].includes(router.pathname)) && <AppFooter />}
         <AppBackGround />
         <AppLoading />
       </Provider>
