@@ -5,7 +5,7 @@ export function getCurrentTheme(color: string) {
 
 // 获取当前主题字体颜色
 export function getCurrentFontColor(color: string) {
-  return color === 'light' ? '#333' : '#ccc'
+  return color === 'light' ? '#2c3e50' : '#ccc'
 }
 
 // 获取当前主题的文章卡片背景色
