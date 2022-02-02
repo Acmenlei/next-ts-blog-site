@@ -19,3 +19,11 @@ export const isLoginStatus = (data?: any) => {
 export const logOutAction = (data?: any) => {
   return post("/reception/user/logout", data)
 }
+
+export const updateUserInfo = (data: any) => {
+  return post('/reception/user/update', data)
+}
+
+export const updatePWD = (data: any) => {
+  return post('/reception/user/pwd', data)
+}

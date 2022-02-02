@@ -14,11 +14,11 @@ const routes = [
     path: '/board',
     icon: 'icon-jurassic_message'
   },
-  // {
-  //   name: '关于我',
-  //   path: '/about',
-  //   icon: 'icon-guanyuwomen'
-  // }
+  {
+    name: '个人中心',
+    path: '/profile',
+    icon: 'icon-guanyuwomen'
+  }
 ]
 
 

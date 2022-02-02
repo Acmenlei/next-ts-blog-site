@@ -25,4 +25,7 @@ export const CommentWrapper =  styled.div`
         opacity: 0;
         transform: scale(0);
     }
+    .ant-image-mask {
+        border-radius: 50%;
+    }
 `

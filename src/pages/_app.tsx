@@ -55,7 +55,7 @@ const App = memo(function ({ Component, pageProps }: AppProps) {
         <div className='container-wrap mt-20 pb-20'>
           <Component {...pageProps} />
         </div>
-        { router.pathname != '/' && <AppFooter /> }
+        { (!['/', '/login'].includes(router.pathname)) && <AppFooter /> }
         <AppBackGround />
         <AppLoading />
       </Provider>

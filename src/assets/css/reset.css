@@ -53,3 +53,23 @@ a {
 a:hover {
   color: #ccc;
 }
+
+.input-icon {
+  color: #ccc;
+  padding-right: 5px;
+}
+
+.form-table {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-table .ant-form-item {
+  width: 90%;
+}
+
+.ant-form-item button  {
+  width: 100%;
+}

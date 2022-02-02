@@ -1,4 +1,4 @@
-import { Comment, Empty, Modal, Tooltip } from 'antd';
+import { Comment, Empty, Image, Modal, Tooltip } from 'antd';
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -101,7 +101,7 @@ export default memo(function BoardComment(props: any) {
                       key={ll_id}
                       actions={ActionJSX({ ll_id, ll_level, ll_nick_name, ll_username })}
                       author={<a href='#!' style={{color: getCurrentNickNameColor(theme)}}>{ll_nick_name}</a>}
-                      avatar={ll_avatar}
+                      avatar={<Image src={ll_avatar}/>}
                       content={ll_content}
                       datetime={
                         <Tooltip
@@ -117,7 +117,7 @@ export default memo(function BoardComment(props: any) {
                               key={citem.ll_id}
                               actions={ActionJSX({ ll_id, ll_level: citem.ll_level, ll_nick_name: citem.ll_nick_name, ll_username })}
                               author={<a href='#!' style={{color: getCurrentNickNameColor(theme)}}>{citem.ll_nick_name}</a>}
-                              avatar={citem.ll_avatar}
+                              avatar={<Image src={citem.ll_avatar}/>}
                               // 二级留言内容 前缀@
                               content={
                                 <>

@@ -9,4 +9,10 @@ export const MessageBoardWrapper = styled.div`
   background-color: ${(props: any) => getCurrentCardBackground(props.theme)};
   transition: background-color .2s, color .2s;
   color: ${(props: any) => getCurrentFontColor(props.theme)};
+  animation: transformXAnimation .5s;
+
+  @keyframes transformXAnimation {
+    from { transform: translateX(-100%) }
+    to { transform: translateX(0) }
+  }
 `

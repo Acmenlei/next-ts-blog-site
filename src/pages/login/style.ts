@@ -5,16 +5,19 @@ export const OutContainerWrapper = styled.div`
 `
 
 export const ContainerWrapper = styled.div`
+  border-radius: 8px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // height: 100vh;
+  animation: translateXAnimation .3s;
   overflow: hidden;
-  background: #FFFFFF;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.24) inset;
-  text-align: center;
 
+  @keyframes translateXAnimation {
+    0%{ transform: translate(-100%,-100%) }
+   100%{ transform: translate(-50%, -50%) }
+  }
   .login-enter {
     transform: translateY(-100%);
   }
@@ -41,52 +44,9 @@ export const ContainerWrapper = styled.div`
 
 const commonStyles = styled.div`
   background: white;
-  width: 500px;
-  display: flex;
-  flex-direction: column;
+  width: 400px;
   align-items: center;
-  padding: 50px 20px;
-
-  h2 {
-    width: 60%;
-    color: #333;
-  }
-
-  input {
-    width: 60%;
-    outline: none;
-    border: none;
-    background: #f2f2f2;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-    border-radius: 5px;
-  }
-
-  div {
-    text-align: center;
-    width: 100%;
-
-    button {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: none;
-    background: #4CAF50;
-    width: 60%;
-    border: none;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 5px;
-
-    &:hover {
-      opacity: .8;
-    }
-  }
-  }
+  position: relative;
 `
 
 export const LoginWrapper = styled(commonStyles)`

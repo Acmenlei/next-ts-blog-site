@@ -2,35 +2,28 @@ import React, { memo, useCallback, useState } from 'react';
 import { NextPage } from 'next';
 import { useDispatch } from 'react-redux';
 import { SwitchTransition, CSSTransition } from "react-transition-group"
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 import { OutContainerWrapper, ContainerWrapper, LoginWrapper, RegisterWrapper } from "./style";
 import { userLoginVerify, userRegister } from '@/services/modules/login';
 import { userLoginAction } from '@/store/modules/login/actionCreators';
 import { errorMessage, successMessage, warningMessage } from '@/common/message';
-import { useRouter } from 'next/router';
+import ContainerTrigger from "@/components/login-ctn-trigger"
 
 const Login: NextPage = memo(() => {
   // redux hooks
   const dispatch = useDispatch()
   // other hooks
   const [isLogin, setIsLogin] = useState(true)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const router = useRouter()
 
-  const changeUsername = useCallback((value: string) => {
-    setUsername(value)
-  }, [])
-  const changePassword = useCallback((value: string) => {
-    setPassword(value)
-  }, [])
-  const changeLogin = useCallback(() => {
-    setUsername("")
-    setPassword("")
+  const triggerContaienr = useCallback(() => {
     setIsLogin(!isLogin)
   }, [isLogin])
-  const router = useRouter()
   // 登录逻辑
-  const onFinishLogin = useCallback(() => {
+  const onFinishLogin = useCallback(({ username, password }) => {
+    console.log(username, password)
     // redux-thunk 莫名不起效果 暂时这么写。
     userLoginVerify({ ll_username: username, ll_password: password })
       .then(({ data, code, msg }: any) => {
@@ -42,9 +35,9 @@ const Login: NextPage = memo(() => {
           router.reload()
         }
       })
-  }, [username, password, dispatch])
+  }, [dispatch])
   // 注册框逻辑
-  const onFinishRegister = useCallback(() => {
+  const onFinishRegister = useCallback(({ username, password }) => {
     userRegister({ ll_username: username, ll_password: password })
       .then(({ code, msg }: any) => {
         if (code === 200) {
@@ -55,32 +48,29 @@ const Login: NextPage = memo(() => {
           errorMessage(msg);
         }
       })
-  }, [username, password])
+  }, [])
 
   return (
     <OutContainerWrapper>
-      <ContainerWrapper>
+      <ContainerWrapper >
         <SwitchTransition>
           <CSSTransition classNames="login" timeout={300} key={isLogin}>
             {isLogin ?
               <LoginWrapper>
-                <h2>登录</h2>
-                <input placeholder='请输入用户名' id='username' type="text" onChange={e => changeUsername(e.target.value)} />
-                <input placeholder='请输入密码' id='password' type="password" onChange={e => changePassword(e.target.value)} />
-                <div>
-                  <button onClick={onFinishLogin}>登录</button>
-                  <button onClick={changeLogin}>去注册</button>
-                </div>
-
+                <Image
+                  width={400}
+                  height={300}
+                  className='container-top'
+                  src={require("../../assets/img/loginlight.jpg")} />
+                <ContainerTrigger triggerContaienr={triggerContaienr} title="登录" onFinish={onFinishLogin} />
               </LoginWrapper> :
               <RegisterWrapper>
-                <h2>注册</h2>
-                <input placeholder='请输入用户名' id='username' type="text" onChange={e => changeUsername(e.target.value)} />
-                <input placeholder='请输入密码' id='password' type="password" onChange={e => changePassword(e.target.value)} />
-                <div>
-                  <button onClick={onFinishRegister}>注册</button>
-                  <button onClick={changeLogin}>去登录</button>
-                </div>
+                <Image
+                  className='container-top'
+                  width={400}
+                  height={300}
+                  src={require("../../assets/img/logindark.jpg")} />
+                <ContainerTrigger triggerContaienr={triggerContaienr} title="注册帐户" onFinish={onFinishRegister} />
               </RegisterWrapper>
             }
           </CSSTransition>

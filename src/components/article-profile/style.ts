@@ -8,6 +8,9 @@ export const ArticleProfileWrapper = styled.div`
   color: ${(props: any) => getCurrentFontColor(props.theme)};
   margin-left: 10px;
   
+    .ant-image-mask {
+      border-radius: 50%;
+    }
   .avatar {
     display: flex;
     margin: 10px 0;
