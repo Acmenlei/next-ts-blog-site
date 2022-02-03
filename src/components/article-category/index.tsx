@@ -6,7 +6,7 @@ import { formatCategory } from '@/utils/format';
 
 import ArticleRContainer from "@/components/article-r-container"
 
-export default memo(function (props: any) {
+export default memo(function myArticleCategory(props: any) {
   const { categoryList, categoryCounts } = props
   return (
     <ArticleRContainer title="文章类别" icon="iconfont icon-fenlei" color="green">

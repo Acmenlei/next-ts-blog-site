@@ -20,7 +20,7 @@ import { logOutAction } from '@/services/modules/login';
 import { errorMessage, successMessage } from '@/common/message';
 import { changeUserInfoAction } from '@/store/modules/login/actionCreators';
 
-const AppHeader = memo((props: any) => {
+const AppHeader = memo(function MyAppHeader(props: any) {
   // redux hooks
   const dispatch = useDispatch()
   const { userInfo } = useSelector((state: any) => {
@@ -99,6 +99,7 @@ const AppHeader = memo((props: any) => {
               timeout={300} >
               <Tooltip placement="right" title={theme === 'light' ? '切换夜间模式' : '切换白天模式'}>
                 <Image
+                  alt='切换主题显示对应的图标'
                   onClick={props.changeTheme}
                   src={require(`@/assets/svg/${theme === 'light' ? 'sunshine' : 'moon'}.svg`)}
                   width={40}

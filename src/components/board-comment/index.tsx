@@ -34,7 +34,7 @@ export default memo(function BoardComment(props: any) {
       okText: "确认",
       onOk: cb
     })
-  }, [])
+  }, [modal])
   // 回复modal
   const isReplyComment = useCallback((nickname, pid, pUsername) => {
     setReplyContent("@" + nickname + "：")
@@ -49,7 +49,7 @@ export default memo(function BoardComment(props: any) {
     props.reply(pId, pUsername, nickName, replyContent.slice(replyContent.indexOf("：") + 1))
     // 重置内容
     setReplyContent(replyContent.slice(0, replyContent.indexOf("：") + 1))
-  }, [props.reply, replyContent, pId, pUsername, nickName])
+  }, [props, replyContent, pId, pUsername, nickName])
   // 取消回复
   const cancelReply = useCallback(() => {
     setPusername("")
@@ -64,6 +64,7 @@ export default memo(function BoardComment(props: any) {
       // 只有评论者自己才能删除评论 当然还有站长
       userInfo && userInfo.ll_username == ll_username &&
       <span
+        key={1}
         style={{ color: getCurrentNickNameColor(theme) }}
         onClick={() => isRemoveComment(() => props.removeComment({
           id: ll_id,
@@ -71,6 +72,7 @@ export default memo(function BoardComment(props: any) {
           username: ll_username
         }))}>删除</span>,
       <span
+        key={2}
         style={{ color: getCurrentNickNameColor(theme) }}
         onClick={() => isReplyComment(ll_nick_name, ll_id, ll_username)}>回复</span>
     ]

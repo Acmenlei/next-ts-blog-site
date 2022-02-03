@@ -25,7 +25,7 @@ export default memo(function ProfileUpdateInfo(props: any) {
     } else {
       errorMessage(msg)
     }
-  }, [])
+  }, [router, ll_id])
 
   return (
     <ProfileUpdateInfoWrapper theme={theme}>

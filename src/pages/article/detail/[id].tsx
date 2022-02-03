@@ -9,19 +9,19 @@ import {
   ArticleDetailWrapper,
   ArticleDetailContent,
   ArticleDetailOutLine
-} from "./style"
+} from "@/styles/detail"
 import { fetchArticleById } from '@/services/modules/article';
 import { articleCommentPublish, articleCommentReply, deleteArticleCommentById, fetchAllArticleCommentList } from "@/services/modules/articleComment"
 import { ThemeContext } from '@/common/context';
 import { formatTime } from '@/utils/format';
 import TextArea from 'antd/lib/input/TextArea';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { successMessage, warningMessage } from '@/common/message';
 import { useRouter } from 'next/router';
 
 import BoardComment from '@/components/board-comment';
 
-const ArticleDetail: NextPage = memo((props: any) => {
+const ArticleDetail: NextPage = memo( function MyArticleDetail(props: any) {
   // redux hook
   const { userInfo } = useSelector((state: any) => {
     return {
@@ -34,13 +34,11 @@ const ArticleDetail: NextPage = memo((props: any) => {
   const [total, setTotal] = useState(props.total)
   const [content, setContent] = useState("")
 
-
+  const codeRef = createRef()
   const theme = useContext(ThemeContext)
   useEffect(() => {
     (codeRef.current as HTMLElement).innerHTML = articleDetail.ll_content_html
-  }, [articleDetail])
-  // console.log(userInfo, "相等")
-  const codeRef = createRef()
+  }, [articleDetail, codeRef])
   const router = useRouter()
   const articleId = useMemo(() => router.query.id, [router])
 
@@ -73,7 +71,7 @@ const ArticleDetail: NextPage = memo((props: any) => {
       resetArticleCommentList()
     }
     setContent("")
-  }, [userInfo, content, articleId])
+  }, [userInfo, content, articleId, resetArticleCommentList])
   // 删除文章评论逻辑
   const removeComment = useCallback(async ({ id, level, username }) => {
     const { code, msg }: any = await deleteArticleCommentById({
@@ -86,7 +84,7 @@ const ArticleDetail: NextPage = memo((props: any) => {
       successMessage(msg)
       resetArticleCommentList()
     }
-  }, [articleId])
+  }, [articleId, resetArticleCommentList])
   // 回复文章评论逻辑
   const reply = useCallback(async (id, username, nickName, content) => {
     if (!userInfo) {
@@ -107,7 +105,7 @@ const ArticleDetail: NextPage = memo((props: any) => {
       successMessage(msg)
       resetArticleCommentList()
     }
-  }, [userInfo, articleId])
+  }, [userInfo, articleId, resetArticleCommentList])
   return (
     <>
       <ArticleDescWrapper theme={theme}>

@@ -5,13 +5,17 @@ import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-import { OutContainerWrapper, ContainerWrapper, LoginWrapper, RegisterWrapper } from "./style";
+import { 
+  OutContainerWrapper, 
+  ContainerWrapper, 
+  LoginWrapper, 
+  RegisterWrapper } from "@/styles/login";
 import { userLoginVerify, userRegister } from '@/services/modules/login';
 import { userLoginAction } from '@/store/modules/login/actionCreators';
 import { errorMessage, successMessage, warningMessage } from '@/common/message';
 import ContainerTrigger from "@/components/login-ctn-trigger"
 
-const Login: NextPage = memo(() => {
+const Login: NextPage = memo(function MyLogin() {
   // redux hooks
   const dispatch = useDispatch()
   // other hooks
@@ -35,7 +39,7 @@ const Login: NextPage = memo(() => {
           router.reload()
         }
       })
-  }, [dispatch])
+  }, [dispatch, router])
   // 注册框逻辑
   const onFinishRegister = useCallback(({ username, password }) => {
     userRegister({ ll_username: username, ll_password: password })

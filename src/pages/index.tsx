@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import { memo } from 'react';
-import { IndexWrapper } from './style'
+import { IndexWrapper } from '@/styles/home'
 // local
 
-const Home: NextPage = memo(() => {
+const Home: NextPage = memo(function myHome(){
   return (
     <IndexWrapper>
       <div className="message">

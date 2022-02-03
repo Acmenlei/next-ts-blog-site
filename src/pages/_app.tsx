@@ -22,7 +22,7 @@ import AppBackGround from '@/components/app-background'
 import AppLoading from '@/components/app-loading'
 import AppFooter from '@/components/app-footer'
 
-const App = memo(function ({ Component, pageProps }: AppProps) {
+const App = memo(function MyApp({ Component, pageProps }: AppProps) {
   // other hook
   const [theme, setTheme] = useState('light')
   // other logic
@@ -60,7 +60,7 @@ const App = memo(function ({ Component, pageProps }: AppProps) {
       Events.off("routeChangeStart", () => { })
       Events.off("routeChangeComplete", () => { })
     }
-  }, [store])
+  }, [router])
 
   return (
     <ThemeContext.Provider value={theme}>

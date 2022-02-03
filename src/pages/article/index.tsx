@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import type { NextPage } from "next"
 import { Empty, Pagination } from "antd"
 
-import { ArticleWrapper } from "./style"
+import { ArticleWrapper } from "@/styles/article"
 import {
   fetchArticleCategoryList,
   fetchArticleList,
@@ -18,7 +18,7 @@ import ArticleTagWall from '@/components/article-tag-wall';
 import ArticleProfile from '@/components/article-profile';
 import { useRouter } from 'next/router';
 
-const Article: NextPage = memo((props: any) => {
+const Article: NextPage = memo( function MyArticle(props: any) {
   const router = useRouter()
   const routerJump = (id: string) => {
     router.push(`/article/detail/${id}`)
@@ -54,11 +54,11 @@ const Article: NextPage = memo((props: any) => {
   const pageChange = useCallback(async (page: number) => {
     setPageNum(page)
     resetArticleList(page)
-  }, [])
+  }, [resetArticleList])
   // 通过标题/分类/标签查询文章
   const searchArticle = useCallback(({ keyword, ll_category, ll_title }) => {
     resetArticleList(pageNum, keyword, ll_category, ll_title)
-  }, [pageNum])
+  }, [pageNum, resetArticleList])
   return (
     <ArticleWrapper>
       {

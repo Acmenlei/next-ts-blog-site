@@ -24,7 +24,7 @@ export default memo(function ProfileFixPwd(props: any) {
     } else {
       errorMessage(msg)
     }
-  }, [])
+  }, [router, ll_id])
   return (
     <ProfileFixPWDWrapper theme={theme}>
       <Image src={ll_avatar}  alt='修改密码_用户头像'/>

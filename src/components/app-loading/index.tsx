@@ -5,7 +5,7 @@ import { SwitchTransition, CSSTransition } from "react-transition-group"
 
 import { AppLoadingWrapper } from "./style"
 
-const AppLoading: NextPage = memo(function () {
+const AppLoading: NextPage = memo(function MyAppLoading() {
   // redux hook
   const { requestLoading } = useSelector((state: any) => {
     return {

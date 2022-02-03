@@ -16,7 +16,7 @@ export default memo(function ArticleRecent(props: any) {
         {
          recentList && recentList.map((item: any) => {
             return (
-              <Link key={item.ll_id} href={`/article/detail/${item.ll_id}`}>
+              <Link key={item.ll_id} href={`/article/detail/${item.ll_id}`} passHref>
                 <li>
                   <span className='article-title text-one-line'>{item.ll_title}</span>
                   <span className='article-publish-time'>{formatTime(item.ll_updatedTime)}</span>

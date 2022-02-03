@@ -5,13 +5,13 @@ import React, { memo, useCallback, useContext, useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import { successMessage, warningMessage } from '@/common/message';
-import { MessageBoardWrapper } from "./style"
+import { MessageBoardWrapper } from "@/styles/board"
 import { delComment, publishComment, queryComments, replyComment } from '@/services/modules/comment';
 import { ThemeContext } from '@/common/context';
 
 import BoardComment from '@/components/board-comment';
 
-const MessageBoard: NextPage = memo((props: any) => {
+const MessageBoard: NextPage = memo(function MyBoard(props: any) {
   // redux hooks
   const { userInfo } = useSelector((state: any) => {
     return {
@@ -49,7 +49,7 @@ const MessageBoard: NextPage = memo((props: any) => {
     }
     // 本应该抽俩出去 但是redux-thunk 不起效 暂时先这么写
     resetCommentsList(pageNum)
-  }, [userInfo, content, pageNum])
+  }, [userInfo, content, pageNum, resetCommentsList])
   // 删除留言(level1/level2)（没登录的情况下不开放显示）如果是一级留言 那么它的子集都要被删除
   const removeComment = useCallback(async ({ id, level, username }) => {
     const { code, msg }: any = await delComment({
@@ -62,7 +62,7 @@ const MessageBoard: NextPage = memo((props: any) => {
       successMessage(msg)
       resetCommentsList(pageNum)
     }
-  }, [pageNum])
+  }, [pageNum, resetCommentsList])
   // 回复留言
   const reply = useCallback(async (id, username, nickName, content) => {
     if (!userInfo) {
@@ -84,13 +84,13 @@ const MessageBoard: NextPage = memo((props: any) => {
       successMessage(msg)
       resetCommentsList(pageNum)
     }
-  }, [userInfo, pageNum])
+  }, [userInfo, pageNum, resetCommentsList])
   // 分页
   const pageNumChange = useCallback((pageNum: number) => {
     setPageNum(pageNum)
     // 重新拉取一下数据
     resetCommentsList(pageNum)
-  },[])
+  }, [resetCommentsList])
   return (
     <MessageBoardWrapper theme={theme}>
       <TextArea
@@ -112,12 +112,12 @@ const MessageBoard: NextPage = memo((props: any) => {
       {/* 分页 */}
       {
         total && <Pagination
-                      style={{color: "#ccc" }}
-                      showTotal={(total) => `共${total}条`}
-                      pageSize={10}
-                      current={pageNum}
-                      onChange={pageNumChange}
-                      total={total} />
+          style={{ color: "#ccc" }}
+          showTotal={(total) => `共${total}条`}
+          pageSize={10}
+          current={pageNum}
+          onChange={pageNumChange}
+          total={total} />
       }
     </MessageBoardWrapper>
   );
