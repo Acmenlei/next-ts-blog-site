@@ -12,7 +12,7 @@ export default memo(function ProfileInfo(props: any) {
   return (
     <ProfileInfoWrapper theme={theme}>
       <div className="avatar">
-        <Image src={ll_avatar} />
+        <Image src={ll_avatar}  alt='修改信息_用户头像'/>
       </div>
       <div className="user-id line">
         <label>用户ID：</label> {ll_id}

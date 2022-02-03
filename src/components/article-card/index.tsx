@@ -1,7 +1,7 @@
 import { COLORS } from '@/common/colors';
 import { ThemeContext } from '@/common/context';
 import { formatCategory, formatTime } from '@/utils/format';
-import { Tag } from 'antd';
+import { Image, Tag } from 'antd';
 import React, { memo, useContext } from 'react';
 import { ArticleCardWrapper } from "./style"
 
@@ -18,7 +18,7 @@ export default memo(function ArticleCard(props: any) {
   return (
     <ArticleCardWrapper theme={theme}>
       <div className="card-item-left">
-        <img src={ll_cover} height={300} width={400} />
+        <Image preview={false} src={ll_cover} height={300} width={400} alt='文章列表_文章封面'/>
       </div>
       <div className="card-item-right">
         <h2>{ll_title}</h2>

@@ -15,6 +15,7 @@ export default memo(function ArticleProfile() {
       <ArticleProfileWrapper theme={theme}>
         <div className='avatar'>
           <Image
+            alt='个人头像'
             src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F4d%2F63%2Fbd%2F4d63bd0b3bf8cc9aa0dc3e1111646b1c.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645933458&t=ff8baa3927894aab55fca094fc1957b8"
             width={70}
             height={70} />

@@ -68,7 +68,7 @@ const AppHeader = memo((props: any) => {
     <AppHeaderWrapper theme={getCurrentTheme(theme)}>
       <div className='container-wrap nav'>
         <AppHeaderLeftWrapper>
-          <Image onClick={() => router.push("/")} width={50} height={50} src={logo} />
+          <Image onClick={() => router.push("/")} width={50} height={50} src={logo} alt='网站logo'/>
           <span className='logo-desc'>CODERLEI</span>
         </AppHeaderLeftWrapper>
         <AppHeaderCenterWrapper>

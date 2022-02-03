@@ -27,7 +27,7 @@ export default memo(function ProfileFixPwd(props: any) {
   }, [])
   return (
     <ProfileFixPWDWrapper theme={theme}>
-      <Image src={ll_avatar} />
+      <Image src={ll_avatar}  alt='修改密码_用户头像'/>
       <Form className='form' onFinish={onFinish}>
         <Form.Item name='old_password' label="旧密码">
           <Input placeholder='请输入旧密码' />

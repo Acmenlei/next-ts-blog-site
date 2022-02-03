@@ -29,7 +29,7 @@ export default memo(function ProfileUpdateInfo(props: any) {
 
   return (
     <ProfileUpdateInfoWrapper theme={theme}>
-      <Image src={ll_avatar} />
+      <Image src={ll_avatar}  alt='修改用户信息_用户头像'/>
       <Form onFinish={onFinish} className='form' labelCol={{ span: 6 }} labelAlign="left">
         <Form.Item label="用户名" name="ll_username">
           <Input disabled defaultValue={ll_username} />

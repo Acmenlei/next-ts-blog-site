@@ -58,6 +58,7 @@ const Login: NextPage = memo(() => {
             {isLogin ?
               <LoginWrapper>
                 <Image
+                  alt='登录界面_风景图'
                   width={400}
                   height={300}
                   className='container-top'
@@ -66,6 +67,7 @@ const Login: NextPage = memo(() => {
               </LoginWrapper> :
               <RegisterWrapper>
                 <Image
+                  alt='注册界面_风景图'
                   className='container-top'
                   width={400}
                   height={300}

@@ -101,7 +101,7 @@ export default memo(function BoardComment(props: any) {
                       key={ll_id}
                       actions={ActionJSX({ ll_id, ll_level, ll_nick_name, ll_username })}
                       author={<a href='#!' style={{color: getCurrentNickNameColor(theme)}}>{ll_nick_name}</a>}
-                      avatar={<Image src={ll_avatar}/>}
+                      avatar={<Image src={ll_avatar} alt='评论留言_用户头像'/>}
                       content={ll_content}
                       datetime={
                         <Tooltip
@@ -117,7 +117,7 @@ export default memo(function BoardComment(props: any) {
                               key={citem.ll_id}
                               actions={ActionJSX({ ll_id, ll_level: citem.ll_level, ll_nick_name: citem.ll_nick_name, ll_username })}
                               author={<a href='#!' style={{color: getCurrentNickNameColor(theme)}}>{citem.ll_nick_name}</a>}
-                              avatar={<Image src={citem.ll_avatar}/>}
+                              avatar={<Image src={citem.ll_avatar} alt='回复留言_用户头像'/>}
                               // 二级留言内容 前缀@
                               content={
                                 <>
