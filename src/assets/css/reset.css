@@ -73,3 +73,13 @@ a:hover {
 .ant-form-item button  {
   width: 100%;
 }
+
+.emoji-container {
+  position: absolute;
+  z-index: 9;
+}
+
+.publish-btn {
+  margin-left: 50px;
+  z-index: 10;
+}

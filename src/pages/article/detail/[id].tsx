@@ -20,8 +20,9 @@ import { successMessage, warningMessage } from '@/common/message';
 import { useRouter } from 'next/router';
 
 import BoardComment from '@/components/board-comment';
+import CommentEmojiCpn from '@/components/comment-emoji-cpn';
 
-const ArticleDetail: NextPage = memo( function MyArticleDetail(props: any) {
+const ArticleDetail: NextPage = memo(function MyArticleDetail(props: any) {
   // redux hook
   const { userInfo } = useSelector((state: any) => {
     return {
@@ -106,6 +107,11 @@ const ArticleDetail: NextPage = memo( function MyArticleDetail(props: any) {
       resetArticleCommentList()
     }
   }, [userInfo, articleId, resetArticleCommentList])
+  // emoji选择
+  const onEmojiClick = useCallback((event: any, emojiObject: any) => {
+    setContent(content + emojiObject.emoji)
+  },[content])
+
   return (
     <>
       <ArticleDescWrapper theme={theme}>
@@ -118,14 +124,18 @@ const ArticleDetail: NextPage = memo( function MyArticleDetail(props: any) {
           <div className='content-container'>
             <p>共&nbsp;{total}&nbsp;条评论</p>
             <TextArea
-              value={content}
-              placeholder='你想对我说什么？'
-              rows={5}
-              showCount
-              maxLength={200}
-              onChange={e => setContent(e.target.value)} />
+                    value={content}
+                    placeholder='你想对我说什么？'
+                    rows={5}
+                    showCount
+                    maxLength={200}
+                    onChange={e => setContent(e.target.value)} />
+            {/* emoji选择 */}
+            <div className="emoji-container">
+              <CommentEmojiCpn onEmojiClick={onEmojiClick} />
+            </div>
             <Button
-              className='mt-15'
+              className='mt-15 publish-btn'
               type="primary"
               onClick={publishArticleComment}>发表</Button>
             <BoardComment

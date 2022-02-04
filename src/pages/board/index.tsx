@@ -1,8 +1,3 @@
-// 解决第三方库使用document或者window的问题
-import dynamic from 'next/dynamic';
-const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false })
-const { SKIN_TONE_MEDIUM_DARK }: any = dynamic(() => import("emoji-picker-react"), { ssr: false })
-
 import { Button, Pagination } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { NextPage } from 'next';
@@ -15,7 +10,7 @@ import { delComment, publishComment, queryComments, replyComment } from '@/servi
 import { ThemeContext } from '@/common/context';
 
 import BoardComment from '@/components/board-comment';
-import { SmileOutlined } from '@ant-design/icons';
+import CommentEmojiCpn from '@/components/comment-emoji-cpn';
 
 const MessageBoard: NextPage = memo(function MyBoard(props: any) {
   // redux hooks
@@ -27,7 +22,6 @@ const MessageBoard: NextPage = memo(function MyBoard(props: any) {
   const theme = useContext(ThemeContext)
   const [content, setContent] = useState("")
   const [pageNum, setPageNum] = useState(1)
-  const [pickerStatus, setPickerStatus] = useState(false)
   const [commentsList, setCommentsList] = useState(props.commentsList)
   const [total, setTotal] = useState(props.total)
 
@@ -102,10 +96,7 @@ const MessageBoard: NextPage = memo(function MyBoard(props: any) {
   const onEmojiClick = useCallback((event: any, emojiObject: any) => {
     setContent(content + emojiObject.emoji)
   },[content])
-  // 切换emoji的选择
-  const triggerPicker = useCallback(() => {
-    setPickerStatus(!pickerStatus)
-  }, [pickerStatus])
+
   return (
     <MessageBoardWrapper theme={theme}>
       <TextArea
@@ -117,14 +108,7 @@ const MessageBoard: NextPage = memo(function MyBoard(props: any) {
               onChange={e => setContent(e.target.value)} />
       {/* emoji选择 */}
       <div className="emoji-container">
-        <SmileOutlined className='emoji-icon' onClick={triggerPicker}/>
-        {
-          pickerStatus && <Picker onEmojiClick={onEmojiClick}
-                                  disableAutoFocus={true}
-                                  skinTone={SKIN_TONE_MEDIUM_DARK}
-                                  groupNames={{ smileys_people: 'PEOPLE' }}
-                                  native />
-        }
+        <CommentEmojiCpn onEmojiClick={onEmojiClick}/>
       </div>
       <Button className='mt-15 publish-btn' type="primary" onClick={publishMessage}>发表</Button>
       {/* 留言板内容 */}
