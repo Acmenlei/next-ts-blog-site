@@ -1,4 +1,5 @@
 ## 开发模式
+先安装依赖 然后执行以下命令
 ```shell
 yarn dev 或者 npm run dev
 ```
