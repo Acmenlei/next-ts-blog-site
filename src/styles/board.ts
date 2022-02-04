@@ -15,4 +15,22 @@ export const MessageBoardWrapper = styled.div`
     from { transform: translateX(-100%) }
     to { transform: translateX(0) }
   }
+
+  .emoji-container {
+    position: absolute;
+    z-index: 9;
+    .emoji-icon {
+      font-size: 30px;
+      color:#999;
+      margin: 10px 20px 0 0;
+      cursor: pointer;
+
+      &:hover {
+        opacity: .9;
+      }
+  }
+  }
+  .publish-btn {
+    margin-left: 50px;
+  }
 `

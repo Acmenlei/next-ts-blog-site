@@ -881,6 +881,11 @@ dom-helpers@^5.0.1:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
 
+emoji-picker-react@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npmmirror.com/emoji-picker-react/-/emoji-picker-react-3.5.0.tgz#664aa230382040b73ef6be6a59e440c422a44bdf"
+  integrity sha512-e577mJVySM/4HIHwQIUGo6EipCoEouF7+a0YEqFhmzg0Yy1GrafmIhc/llG/No5gGodTM9qAT7hMSGCZFDT1Zw==
+
 emoji-regex@^9.2.2:
   version "9.2.2"
   resolved "https://registry.npmmirror.com/emoji-regex/download/emoji-regex-9.2.2.tgz?cache=0&sync_timestamp=1632752198735&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Femoji-regex%2Fdownload%2Femoji-regex-9.2.2.tgz#840c8803b0d8047f4ff0cf963176b32d4ef3ed72"
