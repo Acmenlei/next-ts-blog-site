@@ -9,7 +9,7 @@ interface CustomAxiosResponse extends AxiosResponse {
 }
 
 const service = axios.create({
-  baseURL: 'http://localhost:9001',
+  baseURL: 'http://106.12.143.215/api',
   timeout: 5000,
   withCredentials: true
 })
