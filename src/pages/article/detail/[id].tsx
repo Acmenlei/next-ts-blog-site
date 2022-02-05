@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { createRef, memo, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 import { Affix, Button } from "antd"
 import "highlight.js/styles/github-dark.css"
 import MarkdownNavbar from 'markdown-navbar';
@@ -30,16 +30,11 @@ const ArticleDetail: NextPage = memo(function MyArticleDetail(props: any) {
     }
   })
   const { articleDetail } = props
-  // const { articleDetail, articleComments, total } = props
   const [articleComments, setArticleComments] = useState(props.articleComments)
   const [total, setTotal] = useState(props.total)
   const [content, setContent] = useState("")
 
-  const codeRef = createRef()
   const theme = useContext(ThemeContext)
-  useEffect(() => {
-    (codeRef.current as HTMLElement).innerHTML = articleDetail.ll_content_html
-  }, [articleDetail, codeRef])
   const router = useRouter()
   const articleId = useMemo(() => router.query.id, [router])
 
@@ -120,7 +115,7 @@ const ArticleDetail: NextPage = memo(function MyArticleDetail(props: any) {
       </ArticleDescWrapper>
       <ArticleDetailWrapper theme={theme}>
         <div className='article-container'>
-          <ArticleDetailContent ref={codeRef} theme={theme} />
+          <ArticleDetailContent dangerouslySetInnerHTML={{__html: articleDetail.ll_content_html}}  theme={theme} />
           <div className='content-container'>
             <p>共&nbsp;{total}&nbsp;条评论</p>
             <TextArea
@@ -134,22 +129,13 @@ const ArticleDetail: NextPage = memo(function MyArticleDetail(props: any) {
             <div className="emoji-container">
               <CommentEmojiCpn onEmojiClick={onEmojiClick} />
             </div>
-            <Button
-              className='mt-15 publish-btn'
-              type="primary"
-              onClick={publishArticleComment}>发表</Button>
-            <BoardComment
-              removeComment={removeComment}
-              reply={reply}
-              commentsList={articleComments} />
+            <Button className='mt-15 publish-btn' type="primary" onClick={publishArticleComment}>发表</Button>
+            <BoardComment removeComment={removeComment} reply={reply} commentsList={articleComments} />
           </div>
         </div>
         <Affix offsetTop={55}>
           <ArticleDetailOutLine theme={theme}>
-            <MarkdownNavbar
-              ordered={false}
-              headingTopOffset={0}
-              source={articleDetail.ll_content} />
+            <MarkdownNavbar ordered={false} headingTopOffset={0} source={articleDetail.ll_content} />
           </ArticleDetailOutLine>
         </Affix>
       </ArticleDetailWrapper>
@@ -160,7 +146,6 @@ const ArticleDetail: NextPage = memo(function MyArticleDetail(props: any) {
 ArticleDetail.getInitialProps = async (ctx) => {
   const articleDetail: any = await fetchArticleById({ ll_id: ctx.query.id })
   const articleComments: any = await fetchAllArticleCommentList({ ll_id: ctx.query.id })
-  // console.log(articleComments)
   return {
     articleDetail: articleDetail.data,
     articleComments: articleComments.data,
