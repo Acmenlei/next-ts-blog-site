@@ -1,15 +1,11 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import store from "@/store"
 import { hideLoadingAction, showLoadingAction } from "@/store/modules/home/actionCreators";
 import { errorMessage } from "@/common/message";
-
-interface CustomAxiosResponse extends AxiosResponse {
-  code?: number;
-  msg?: string;
-}
+import { CustomAxiosResponse } from "@/common/interface/axios";
 
 const service = axios.create({
-  baseURL: 'http://106.12.143.215/api',
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   timeout: 5000,
   withCredentials: true
 })
@@ -31,10 +27,9 @@ export const get = (url: string, params: any = {}) => {
     service.get(url, params).then((res: CustomAxiosResponse) => {
       resolve(res);
     }, err => {
-      reject(err)
       errorMessage("网络错误")
       store.dispatch(hideLoadingAction())
-      throw new Error(err)
+      reject(new Error(err))
     })
   })
 }
@@ -45,9 +40,8 @@ export const post = (url: string, data: any = {}) => {
       resolve(res);
     }, err => {
       errorMessage("网络错误")
-      reject(err)
       store.dispatch(hideLoadingAction())
-      throw new Error(err)
+      reject(new Error(err))
     })
   })
 }
