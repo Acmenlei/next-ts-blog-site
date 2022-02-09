@@ -44,6 +44,12 @@ ul {
   -webkit-line-clamp: 1;
   overflow: hidden;
 }
+.text-two-line {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
 
 a {
   text-decoration: none;
@@ -82,4 +88,12 @@ a:hover {
 .publish-btn {
   margin-left: 50px;
   z-index: 10;
+}
+
+.ta-l {
+  text-align: left;
+}
+
+textarea.ant-input {
+  font-size: 16px;
 }

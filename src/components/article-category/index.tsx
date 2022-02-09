@@ -18,6 +18,7 @@ export default memo(function myArticleCategory(props: any) {
                 className='mr-15'
                 count={categoryCounts[index].count}>
               <Tag 
+                className='m-5'
                 onClick={() => props.searchArticle({ ll_category: item.ll_category })} 
                 color={DEEP_COLORS[index]}>{formatCategory(item.ll_category)}</Tag>
             </Badge>

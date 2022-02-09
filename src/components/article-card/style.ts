@@ -44,7 +44,9 @@ export const ArticleCardWrapper = styled.div`
       overflow: hidden;
     }
 
-    h2 {
+    h3 {
+      line-height: 22px;
+      padding-top: 12px;
       color: ${(props: any) => getCurrentFontColor(props.theme)};
     }
 
